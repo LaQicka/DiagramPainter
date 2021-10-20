@@ -2,12 +2,15 @@
 #define FORM_H
 
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QString>
+#include <QDebug>
 
 class Form : public QGraphicsItem
 {
-public:
+
+public:    
     Form();
     Form(QString _text);
     QRectF boundingRect() const;
@@ -18,10 +21,13 @@ public:
 
     int x,y;
 protected:
-    int type; // 1 - rect, 2 - ellipsoid, 3 - romb , 4 - open trapezoid, 5 - close trapezoid
+    qreal x_center, y_center;
+
+    int type; // 1 - rect, 2 - ellipsoid, 3 - romb , 4 - open trapezoid, 5 - close trapezoid;
     QString textContent;
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // FORM_H

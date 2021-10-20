@@ -5,14 +5,18 @@ Form::Form()
     Pressed = false;
     setFlag(ItemIsMovable);
     setFlag(ItemIsSelectable);
-    x = 100, y = 100;
+    x = 0, y = 0;
+    x_center = 125;
+    y_center = 25;
 }
 
 Form::Form(QString text){
     Pressed = false;
     setFlag(ItemIsMovable);
     setFlag(ItemIsSelectable);
-    x = 100, y = 100;
+    x = 0, y = 0;
+    x_center = 125;
+    y_center = 25;
     textContent = text;
 }
 
@@ -39,4 +43,13 @@ void Form::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     setSelected(false);
     update();
     QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void Form::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    x = mapToScene(event->pos()).x() - x_center;
+    y = mapToScene(event->pos()).y() - y_center;
+    x -= x%5;
+    y -= y%5;
+    this->setPos(x,y);
 }

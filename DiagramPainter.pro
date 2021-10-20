@@ -13,7 +13,9 @@ SOURCES += \
     ellipsoid.cpp \
     form.cpp \
     main.cpp \
+    mainscene.cpp \
     mainwindow.cpp \
+    node.cpp \
     opentrapezoid.cpp \
     rect.cpp \
     romb.cpp
@@ -22,7 +24,9 @@ HEADERS += \
     closetrapezoid.h \
     ellipsoid.h \
     form.h \
+    mainscene.h \
     mainwindow.h \
+    node.h \
     opentrapezoid.h \
     rect.h \
     romb.h

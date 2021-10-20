@@ -7,6 +7,9 @@
 #include <QGraphicsScene>
 #include <QList>
 #include <QDebug>
+#include <QGraphicsItemGroup>
+#include <QGraphicsLineItem>
+
 
 #include <form.h>
 #include <rect.h>
@@ -14,6 +17,8 @@
 #include <romb.h>
 #include <opentrapezoid.h>
 #include <closetrapezoid.h>
+#include <node.h>
+#include <mainscene.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,16 +45,18 @@ private slots:
 
     void on_addTrapezoid_clicked();
 
+    void on_connect_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+    MainScene *scene;
 
+    QList <Form*> all;
     QList <Form*> rects;
     QList <Form*> ellips;
     QList <Form*> rombs;
     QList <Form*> openTrapez;
     QList <Form*> closeTrapez;
 
-    QMap <QGraphicsItem*,int> rects_index;
 };
 #endif // MAINWINDOW_H

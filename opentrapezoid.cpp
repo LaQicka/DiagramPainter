@@ -1,6 +1,9 @@
 #include "opentrapezoid.h"
 
 void OpenTrapezoid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     QBrush brush(Qt::white);
 
     if(Pressed){
