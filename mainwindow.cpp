@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     scene = new MainScene(this);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-    //ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     //ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setScene(scene);
 }
@@ -33,18 +33,7 @@ void MainWindow::on_delete_item_clicked()
 
 void MainWindow::on_addRect_clicked()
 {
-    //scene->addRect();
-
-    Node* node1;
-    Node* node2;
-    node1 = new Node();
-    node2 = new Node();
-
-    node1->addNode(node2);
-
-    scene->addItem(node1);
-    scene->addItem(node2);
-
+    scene->addRect();
 }
 
 void MainWindow::on_addEllipse_clicked()
@@ -65,12 +54,23 @@ void MainWindow::on_addTrapezoid_clicked()
 
 void MainWindow::on_connect_clicked()
 {
-    for(int t = ui->graphicsView->scene()->selectedItems().size();t>0;t--)
-    {
-        auto i = ui->graphicsView->scene()->selectedItems().at(0);
 
-        Node* f = dynamic_cast<Node*>(i);
-        qDebug()<<f->getPos().first<<" "<<f->getPos().second<<" --- "<<ui->graphicsView->scene()->selectedItems().at(0)->pos().x()<<" "<<ui->graphicsView->scene()->selectedItems().at(0)->pos().y();
+    Node *n1 = nullptr;
+    Node *n2 = nullptr;
+
+    foreach(auto i,ui->graphicsView->scene()->selectedItems()){
+        if(n1 == nullptr) n1 = dynamic_cast<Node*>(i);
+        else if(n2 == nullptr) n2 = dynamic_cast<Node*>(i);
+        else break;
+    }
+
+    if(n1 != nullptr && n2 != nullptr){
+        Edge* edge;
+        edge = new Edge();
+        edge->setStart(n1);
+        edge->setEnd(n2);
+
+        scene->addItem(edge);
     }
 }
 

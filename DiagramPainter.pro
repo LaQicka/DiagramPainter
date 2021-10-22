@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     closetrapezoid.cpp \
+    edge.cpp \
     ellipsoid.cpp \
     form.cpp \
     main.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     closetrapezoid.h \
+    edge.h \
     ellipsoid.h \
     form.h \
     mainscene.h \

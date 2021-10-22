@@ -17,8 +17,9 @@
 #include <romb.h>
 #include <opentrapezoid.h>
 #include <closetrapezoid.h>
-#include <node.h>
 #include <mainscene.h>
+#include <node.h>
+#include <edge.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

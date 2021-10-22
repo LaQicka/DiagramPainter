@@ -1,37 +1,17 @@
 #include "node.h"
 
-Node::Node()
+Node::~Node()
 {
-    setFlag(ItemIsMovable);
-    setFlag(ItemIsSelectable);
-    x = 0, y = 0;
-    x_center = 5;
-    y_center = 5;
-    edgeNumber = 0;
+    foreach(Edge* edge, edges){
+        if(edge->startNode() == this) edge->deleteStart();
+
+        else edge->deleteEnd();
+    }
 }
 
 QRectF Node::boundingRect() const
 {
     return QRectF(0,0,10,10);
-}
-
-void Node::addNode(Node *newNode)
-{
-    this->edges.push_back(newNode);
-}
-
-QPair<int, int> Node::getPos()
-{
-    QPair<int,int> pos;
-    pos.first = x;
-    pos.second = y;
-    return pos;
-}
-
-void Node::setPos(int x, int y)
-{
-    this->x = x;
-    this->y = y;
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -40,17 +20,48 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(widget);
 
     QRectF item = boundingRect();
-    QBrush brush(Qt::black);
+    QBrush brush(Qt::white);
 
-    painter->setPen(Qt::black);
+    if(Pressed){
+        brush.setColor(Qt::red);
+    }
+    else{
+        brush.setColor(Qt::white);
+    }
+
+    if(isSelected()){
+        brush.setColor(Qt::green);
+    }
+
     painter->fillRect(item,brush);
     painter->drawRect(item);
+}
 
-    for(int i=0;i<edges.size();i++){
-        QPair<int,int> pos = edges[i]->getPos();
-        QLine line(x,y,pos.first,pos.second);
-        painter->drawLine(line);
-        qDebug()<<x<<"-"<<y<<" "<<pos.first<<"-"<<pos.second;
+void Node::addEdge(Edge *edge)
+{
+    edges.append(edge);
+}
+
+QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    switch (change)
+    {
+        case ItemPositionChange:
+            foreach(Edge* edge, edges) edge->adjust();
+            break;
+        default:
+            break;
     }
+
+    return QGraphicsItem::itemChange(change,value);
+}
+
+void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    x = mapToScene(event->pos()).x() - 5;
+    y = mapToScene(event->pos()).y() - 5;
+    x -= x%5;
+    y -= y%5;
+    this->setPos(x,y);
 }
 

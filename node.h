@@ -2,26 +2,33 @@
 #define NODE_H
 
 #include <QGraphicsItem>
-#include <QGraphicsSceneMouseEvent>
-#include <QPainter>
-#include <form.h>
 #include <QList>
+#include <QPainter>
 
+#include <form.h>
+#include <edge.h>
+#include <mainscene.h>
+
+class Edge;
 class Node : public Form
 {
 public:
-    Node();
+
+    ~Node();
+
     QRectF boundingRect() const;
-    void addNode(Node* newNode);
-    bool Pressed;
-    void setText(QString text);
-    QPair<int,int> getPos();
-    void setPos(int x,int y);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void addEdge(Edge* edge);
+
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
+
+    MainScene* scene;
+protected:
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 private:
-    int edgeNumber;
-    QList <Node*> edges;
+public:
+QList <Edge*> edges;
 };
 
 #endif // NODE_H

@@ -10,7 +10,6 @@
 #include <romb.h>
 #include <opentrapezoid.h>
 #include <closetrapezoid.h>
-#include <node.h>
 
 class MainScene : public QGraphicsScene
 {
