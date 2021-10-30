@@ -2,6 +2,8 @@
 #define MAINSCENE_H
 
 #include <QGraphicsScene>
+#include <QGuiApplication>
+#include <QGraphicsItem>
 #include <QList>
 
 #include <form.h>
@@ -22,8 +24,15 @@ public:
     void addTrapezoid();
     void deleteForm(Form* item);
 
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+
+    Form* first_selected = nullptr;
+    Form* second_selected = nullptr;
 private:
     QList <Form*> forms;
+    Form* pressedItem = nullptr;
 
 };
 

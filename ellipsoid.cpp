@@ -15,6 +15,10 @@ void Ellipsoid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         brush.setColor(Qt::white);
     }
 
+    if(Selected){
+        brush.setColor(Qt::blue);
+    }
+
     if(isSelected()){
         brush.setColor(Qt::green);
     }

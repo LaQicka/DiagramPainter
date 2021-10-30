@@ -14,6 +14,10 @@ void Rect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         brush.setColor(Qt::white);
     }
 
+    if(Selected){
+        brush.setColor(Qt::blue);
+    }
+
     if(isSelected()){
         brush.setColor(Qt::green);
     }
@@ -22,4 +26,5 @@ void Rect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawRect(item);
     painter->drawText(boundingRect(), Qt::AlignCenter, textContent);
 }
+
 

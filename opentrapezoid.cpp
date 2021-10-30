@@ -13,6 +13,10 @@ void OpenTrapezoid::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         brush.setColor(Qt::white);
     }
 
+    if(Selected){
+        brush.setColor(Qt::blue);
+    }
+
     if(isSelected()){
         brush.setColor(Qt::green);
     }

@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+
 #include <form.h>
 
 class Rect : public Form
@@ -12,7 +13,6 @@ public:
     Rect(QString text) : Form(text){ type = 2; }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
 };
 
 #endif // RECT_H

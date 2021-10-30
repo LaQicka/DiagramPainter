@@ -20,8 +20,45 @@ Form::Form(QString text){
     textContent = text;
 }
 
+Form::~Form()
+{
+    foreach(Edge* edge, input_edges){
+        if(edge->startNode() == this) edge->deleteStart();
+        else edge->deleteEnd();
+    }
+    foreach(Edge* edge, output_edges){
+        if(edge->startNode() == this) edge->deleteStart();
+        else edge->deleteEnd();
+    }
+}
+
 void Form::setText(QString _text){
     textContent = _text;
+}
+
+void Form::addInputEdge(Edge *edge)
+{
+    input_edges.append(edge);
+}
+
+void Form::addOutputEdge(Edge *edge)
+{
+    output_edges.append(edge);
+}
+
+QVariant Form::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    switch (change)
+    {
+        case ItemPositionChange:
+            foreach(Edge* edge, input_edges) edge->adjust();
+            foreach(Edge* edge, output_edges) edge->adjust();
+            break;
+        default:
+            break;
+    }
+
+    return QGraphicsItem::itemChange(change,value);
 }
 
 QRectF Form::boundingRect() const
@@ -32,7 +69,7 @@ QRectF Form::boundingRect() const
 void Form::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     Pressed = true;
-    setSelected(false);
+    setSelected(true);
     update();
     QGraphicsItem::mousePressEvent(event);
 }
@@ -43,13 +80,4 @@ void Form::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     setSelected(false);
     update();
     QGraphicsItem::mouseReleaseEvent(event);
-}
-
-void Form::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    x = mapToScene(event->pos()).x() - x_center;
-    y = mapToScene(event->pos()).y() - y_center;
-    x -= x%5;
-    y -= y%5;
-    this->setPos(x,y);
 }

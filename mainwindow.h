@@ -53,11 +53,6 @@ private:
     MainScene *scene;
 
     QList <Form*> all;
-    QList <Form*> rects;
-    QList <Form*> ellips;
-    QList <Form*> rombs;
-    QList <Form*> openTrapez;
-    QList <Form*> closeTrapez;
 
 };
 #endif // MAINWINDOW_H

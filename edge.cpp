@@ -1,26 +1,28 @@
 #include "edge.h"
 
-void Edge::setStart(Node *node)
+void Edge::setStart(Form *node)
 {
     start = node;
-    start->addEdge(this);
+    start->addOutputEdge(this);
     adjust();
 }
 
-void Edge::setEnd(Node *node)
+void Edge::setEnd(Form *node)
 {
     end = node;
-    end->addEdge(this);
+    end->addInputEdge(this);
     adjust();
 }
 
 void Edge::deleteStart()
 {
+    end->input_edges.removeAll(this);
     start = nullptr;
 }
 
 void Edge::deleteEnd()
 {
+    start->output_edges.removeAll(this);
     end = nullptr;
 }
 
@@ -49,18 +51,18 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     if(start == nullptr || end == nullptr) return;
 
-    QLineF line(start->x,start->y,end->x,end->y);
+    QLineF line(start->x+125,start->y+50,end->x+125,end->y);
 
     painter->setPen(Qt::black);
     painter->drawLine(line);
 }
 
-Node *Edge::startNode() const
+Form *Edge::startNode() const
 {
     return start;
 }
 
-Node *Edge::endNode() const
+Form *Edge::endNode() const
 {
     return end;
 }

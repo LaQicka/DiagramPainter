@@ -13,6 +13,10 @@ void CloseTrapezoid::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
         brush.setColor(Qt::white);
     }
 
+    if(Selected){
+        brush.setColor(Qt::blue);
+    }
+
     if(isSelected()){
         brush.setColor(Qt::green);
     }

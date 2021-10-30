@@ -14,6 +14,10 @@ void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         brush.setColor(Qt::white);
     }
 
+    if(Selected){
+        brush.setColor(Qt::blue);
+    }
+
     if(isSelected()){
         brush.setColor(Qt::green);
     }

@@ -3,15 +3,16 @@
 
 #include <QGraphicsItem>
 #include <node.h>
+#include <form.h>
 #include <cmath>
 
-class Node;
+class Form;
 class Edge : public QGraphicsItem
 {
 public:
 
-    void setStart(Node* node);
-    void setEnd(Node* node);
+    void setStart(Form* node);
+    void setEnd(Form* node);
     void deleteStart();
     void deleteEnd();
 
@@ -20,12 +21,12 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    Node *startNode() const;
-    Node *endNode() const;
+    Form *startNode() const;
+    Form *endNode() const;
 
 private:
-    Node* start = nullptr;
-    Node* end = nullptr;
+    Form* start = nullptr;
+    Form* end = nullptr;
 
 };
 

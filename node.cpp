@@ -1,13 +1,13 @@
 #include "node.h"
 
-Node::~Node()
-{
-    foreach(Edge* edge, edges){
-        if(edge->startNode() == this) edge->deleteStart();
+//Node::~Node()
+//{
+//    foreach(Edge* edge, edges){
+//        if(edge->startNode() == this) edge->deleteStart();
 
-        else edge->deleteEnd();
-    }
-}
+//        else edge->deleteEnd();
+//    }
+//}
 
 QRectF Node::boundingRect() const
 {
@@ -22,7 +22,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QRectF item = boundingRect();
     QBrush brush(Qt::white);
 
-    if(Pressed){
+    if(1){
         brush.setColor(Qt::red);
     }
     else{
@@ -37,31 +37,6 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawRect(item);
 }
 
-void Node::addEdge(Edge *edge)
-{
-    edges.append(edge);
-}
 
-QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
-{
-    switch (change)
-    {
-        case ItemPositionChange:
-            foreach(Edge* edge, edges) edge->adjust();
-            break;
-        default:
-            break;
-    }
 
-    return QGraphicsItem::itemChange(change,value);
-}
-
-void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    x = mapToScene(event->pos()).x() - 5;
-    y = mapToScene(event->pos()).y() - 5;
-    x -= x%5;
-    y -= y%5;
-    this->setPos(x,y);
-}
 

@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     scene = new MainScene(this);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    //ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setScene(scene);
 }
 
@@ -55,14 +54,8 @@ void MainWindow::on_addTrapezoid_clicked()
 void MainWindow::on_connect_clicked()
 {
 
-    Node *n1 = nullptr;
-    Node *n2 = nullptr;
-
-    foreach(auto i,ui->graphicsView->scene()->selectedItems()){
-        if(n1 == nullptr) n1 = dynamic_cast<Node*>(i);
-        else if(n2 == nullptr) n2 = dynamic_cast<Node*>(i);
-        else break;
-    }
+    Form *n1 = scene->first_selected;
+    Form *n2 = scene->second_selected;
 
     if(n1 != nullptr && n2 != nullptr){
         Edge* edge;
