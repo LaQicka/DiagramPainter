@@ -9,7 +9,7 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene()
 void MainScene::addRect()
 {
     Rect* rect;
-    rect = new Rect("Rect");
+    rect = new Rect();
     forms.append(rect);
     this->addItem(rect);
 }
@@ -17,7 +17,7 @@ void MainScene::addRect()
 void MainScene::addEllipse()
 {
     Ellipsoid* ellipse;
-    ellipse = new Ellipsoid("Ellipse");
+    ellipse = new Ellipsoid();
     forms.append(ellipse);
     this->addItem(ellipse);
 }
@@ -25,7 +25,7 @@ void MainScene::addEllipse()
 void MainScene::addRomb()
 {
     Romb* romb;
-    romb = new Romb("Romb");
+    romb = new Romb();
     forms.append(romb);
     this->addItem(romb);
 }
@@ -34,8 +34,8 @@ void MainScene::addTrapezoid()
 {
     OpenTrapezoid* opt;
     CloseTrapezoid* clt;
-    opt = new OpenTrapezoid("Open Trapezoid");
-    clt = new CloseTrapezoid("Close Trapezoid");
+    opt = new OpenTrapezoid();
+    clt = new CloseTrapezoid();
     forms.append(opt);
     forms.append(clt);
     this->addItem(opt);

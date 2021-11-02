@@ -57,7 +57,7 @@ void MainWindow::on_connect_clicked()
     Form *n1 = scene->first_selected;
     Form *n2 = scene->second_selected;
 
-    if(n1 != nullptr && n2 != nullptr){
+    if(n1 != nullptr && n2 != nullptr && n1->existOutputSlots() && n2->existInputSlots()){
         Edge* edge;
         edge = new Edge();
         edge->setStart(n1);

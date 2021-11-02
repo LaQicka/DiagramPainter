@@ -9,7 +9,7 @@
 class Romb : public Form
 {
 public:
-    Romb() : Form(){ type = 3; }
+    Romb();
     Romb(QString text) : Form(text){ type = 3; }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

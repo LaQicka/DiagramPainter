@@ -17,12 +17,26 @@ void Edge::setEnd(Form *node)
 void Edge::deleteStart()
 {
     end->input_edges.removeAll(this);
+    for(int i=0;i<end->input_connections.size();i++){
+        if(end->input_connections[i].edge == this){
+            end->input_connections[i].edge = nullptr;
+            end->input_connections[i].isBusy = false;
+            break;
+        }
+    }
     start = nullptr;
 }
 
 void Edge::deleteEnd()
 {
     start->output_edges.removeAll(this);
+    for(int i=0;i<start->output_connections.size();i++){
+        if(start->output_connections[i].edge == this){
+            start->output_connections[i].edge = nullptr;
+            start->output_connections[i].isBusy = false;
+            break;
+        }
+    }
     end = nullptr;
 }
 
@@ -51,7 +65,11 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     if(start == nullptr || end == nullptr) return;
 
-    QLineF line(start->x+125,start->y+50,end->x+125,end->y);
+    QPair <int,int> st,en;
+    st = start->getPos(this);
+    en = end->getPos(this);
+
+    QLineF line(st.first,st.second,en.first,en.second);
 
     painter->setPen(Qt::black);
     painter->drawLine(line);

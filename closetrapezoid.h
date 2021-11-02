@@ -7,7 +7,7 @@ class CloseTrapezoid : public Form
 {
 public:
 public:
-    CloseTrapezoid() : Form(){ type = 5; }
+    CloseTrapezoid();
     CloseTrapezoid(QString text) : Form(text){ type = 5; }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

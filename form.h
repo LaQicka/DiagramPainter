@@ -12,6 +12,13 @@
 class Edge;
 class Form : public QGraphicsItem
 {
+private:
+    struct Connection{
+        int x_connect;
+        int y_connect;
+        bool isBusy = 0;
+        Edge* edge;
+    };
 public:    
     Form();
     Form(QString _text);
@@ -27,10 +34,17 @@ public:
     void addInputEdge(Edge* edge);
     void addOutputEdge(Edge* edge);
 
+    bool existInputSlots();
+    bool existOutputSlots();
+
+    QPair <int,int> getPos(Edge* edge);
+
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
     QList <Edge*> input_edges;
     QList <Edge*> output_edges;
+    QVector <Connection> input_connections;
+    QVector <Connection> output_connections;
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);

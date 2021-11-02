@@ -6,7 +6,7 @@
 class OpenTrapezoid : public Form
 {
 public:
-    OpenTrapezoid() : Form(){ type = 4; }
+    OpenTrapezoid();
     OpenTrapezoid(QString text) : Form(text){ type = 4; }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

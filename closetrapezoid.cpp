@@ -1,5 +1,16 @@
 #include "closetrapezoid.h"
 
+CloseTrapezoid::CloseTrapezoid() : Form()
+{
+    type = 5;
+    input_connections.resize(1);
+    output_connections.resize(1);
+    input_connections[0].x_connect = 125;
+    input_connections[0].y_connect = 0;
+    output_connections[0].x_connect = 125;
+    output_connections[0].y_connect = 50;
+}
+
 void CloseTrapezoid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
     Q_UNUSED(option);
     Q_UNUSED(widget);

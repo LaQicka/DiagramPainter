@@ -9,7 +9,7 @@
 class Rect : public Form
 {
 public:
-    Rect() : Form(){ type = 2; }
+    Rect();
     Rect(QString text) : Form(text){ type = 2; }
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
