@@ -6,6 +6,8 @@ Form::Form()
     setFlag(ItemIsMovable);
     setFlag(ItemIsSelectable);
     x = 0, y = 0;
+    input.first = 125;
+    input.second = 0;
     x_center = 125;
     y_center = 25;
 }
@@ -38,14 +40,7 @@ void Form::setText(QString _text){
 
 void Form::addInputEdge(Edge *edge)
 {
-    for(int i=0;i<input_connections.size();i++){
-        if(!input_connections[i].isBusy){
-            input_connections[i].edge = edge;
-            input_connections[i].isBusy = true;
-            input_edges.append(edge);
-            return;
-         }
-    }
+    input_edges.append(edge);
 }
 
 void Form::addOutputEdge(Edge *edge)
@@ -60,13 +55,6 @@ void Form::addOutputEdge(Edge *edge)
     }
 }
 
-bool Form::existInputSlots()
-{
-    bool flag = 1;
-    for(int i=0;i<input_connections.size() && flag;i++)flag = input_connections[i].isBusy;
-    return !flag;
-}
-
 bool Form::existOutputSlots()
 {
     bool flag = 1;
@@ -77,11 +65,15 @@ bool Form::existOutputSlots()
 QPair<int, int> Form::getPos(Edge *edge)
 {
     QPair <int,int> ans;
-
-    for(int i=0;i<input_connections.size();i++){
-        if(input_connections[i].edge == edge){
-            ans.first = this->x + input_connections[i].x_connect;
-            ans.second = this->y + input_connections[i].y_connect;
+    if(type == 6) {
+        ans.first = x + 2;
+        ans.second = y + 2;
+        return ans;
+    }
+    foreach(Edge* ed, input_edges){
+        if(ed == edge){
+            ans.first = x + input.first;
+            ans.second = y + input.second;
             return ans;
         }
     }

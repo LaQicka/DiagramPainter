@@ -43,7 +43,7 @@ public:
 
     QList <Edge*> input_edges;
     QList <Edge*> output_edges;
-    QVector <Connection> input_connections;
+    QPair<int,int> input;
     QVector <Connection> output_connections;
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

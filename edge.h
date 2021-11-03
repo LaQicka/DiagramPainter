@@ -2,7 +2,6 @@
 #define EDGE_H
 
 #include <QGraphicsItem>
-#include <node.h>
 #include <form.h>
 #include <cmath>
 
@@ -23,10 +22,10 @@ public:
 
     Form *startNode() const;
     Form *endNode() const;
-
-private:
     Form* start = nullptr;
     Form* end = nullptr;
+
+private:
 
 };
 

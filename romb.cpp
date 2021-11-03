@@ -3,10 +3,7 @@
 Romb::Romb()
 {
     type = 3;
-    input_connections.resize(1);
     output_connections.resize(2);
-    input_connections[0].x_connect = 125;
-    input_connections[0].y_connect = 0;
     output_connections[0].x_connect = 0;
     output_connections[0].y_connect = 25;
     output_connections[1].x_connect = 250;

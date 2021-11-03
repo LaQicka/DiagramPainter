@@ -17,13 +17,6 @@ void Edge::setEnd(Form *node)
 void Edge::deleteStart()
 {
     end->input_edges.removeAll(this);
-    for(int i=0;i<end->input_connections.size();i++){
-        if(end->input_connections[i].edge == this){
-            end->input_connections[i].edge = nullptr;
-            end->input_connections[i].isBusy = false;
-            break;
-        }
-    }
     start = nullptr;
 }
 

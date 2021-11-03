@@ -50,20 +50,25 @@ void MainWindow::on_addTrapezoid_clicked()
     scene->addTrapezoid();
 }
 
-
 void MainWindow::on_connect_clicked()
 {
 
     Form *n1 = scene->first_selected;
     Form *n2 = scene->second_selected;
-
-    if(n1 != nullptr && n2 != nullptr && n1->existOutputSlots() && n2->existInputSlots()){
-        Edge* edge;
-        edge = new Edge();
-        edge->setStart(n1);
-        edge->setEnd(n2);
-
-        scene->addItem(edge);
+    if(n1 != nullptr && n2 != nullptr && n1->existOutputSlots()){
+        Edge* edge1;
+        Edge* edge2;
+        Node* node;
+        node = new Node();
+        edge1 = new Edge();
+        edge2 = new Edge();
+        edge1->setStart(n1);
+        edge1->setEnd(node);
+        edge2->setStart(node);
+        edge2->setEnd(n2);
+        scene->addItem(node);
+        scene->addItem(edge1);
+        scene->addItem(edge2);
     }
 }
 

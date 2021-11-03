@@ -3,10 +3,7 @@
 Rect::Rect() : Form()
 {
     type = 2;
-    input_connections.resize(1);
     output_connections.resize(1);
-    input_connections[0].x_connect = 125;
-    input_connections[0].y_connect = 0;
     output_connections[0].x_connect = 125;
     output_connections[0].y_connect = 50;
 }
