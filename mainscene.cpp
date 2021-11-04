@@ -45,6 +45,7 @@ void MainScene::addTrapezoid()
 void MainScene::deleteForm(Form* item)
 {
     forms.removeAll(item);
+    this->removeItem(item);
 }
 
 void MainScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

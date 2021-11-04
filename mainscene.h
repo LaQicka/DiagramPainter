@@ -30,8 +30,8 @@ public:
 
     Form* first_selected = nullptr;
     Form* second_selected = nullptr;
-private:
     QList <Form*> forms;
+private:
     Form* pressedItem = nullptr;
 
 };

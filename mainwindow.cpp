@@ -22,11 +22,29 @@ void MainWindow::on_delete_item_clicked()
         auto i = ui->graphicsView->scene()->selectedItems().at(0);
 
         Form* f = dynamic_cast<Form*>(i);
+        bool flag = 0;
+        QList<Form*> start;
+        Form* end;
+        if(f->getType() == 6){
+            flag = 1;
+            end = f->output_edges[0]->endNode();
+            foreach(Edge* edge, f->input_edges){
+                start.append(edge->startNode());
+            }
+        }
 
         scene->deleteForm(f);
-
-        ui->graphicsView->scene()->removeItem(i);
         delete i;
+
+        if(flag){
+            foreach(Form* st, start){
+                Edge* edge;
+                edge = new Edge();
+                edge->setStart(st);
+                edge->setEnd(end);
+                scene->addItem(edge);
+            }
+        }
     }
 }
 
@@ -67,6 +85,7 @@ void MainWindow::on_connect_clicked()
         edge2->setStart(node);
         edge2->setEnd(n2);
         scene->addItem(node);
+        scene->forms.append(node);
         scene->addItem(edge1);
         scene->addItem(edge2);
     }
