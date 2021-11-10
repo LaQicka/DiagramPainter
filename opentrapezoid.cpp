@@ -1,6 +1,6 @@
 #include "opentrapezoid.h"
 
-OpenTrapezoid::OpenTrapezoid()
+OpenTrapezoid::OpenTrapezoid(QString _text) : Form(_text)
 {
     type = 4;
     output_connections.resize(1);

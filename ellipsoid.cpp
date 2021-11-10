@@ -1,6 +1,6 @@
 #include "ellipsoid.h"
 
-Ellipsoid::Ellipsoid()
+Ellipsoid::Ellipsoid(QString _text) : Form(_text)
 {
     type = 1;
     output_connections.resize(1);

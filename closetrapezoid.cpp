@@ -1,6 +1,6 @@
 #include "closetrapezoid.h"
 
-CloseTrapezoid::CloseTrapezoid() : Form()
+CloseTrapezoid::CloseTrapezoid(QString _text) : Form(_text)
 {
     type = 5;
     output_connections.resize(1);

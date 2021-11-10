@@ -8,8 +8,7 @@
 class Ellipsoid : public Form
 {
 public:
-    Ellipsoid();
-    Ellipsoid(QString text) : Form(text){ type = 1; }
+    Ellipsoid(QString _text = "");
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 

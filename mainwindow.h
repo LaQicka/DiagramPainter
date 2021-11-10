@@ -6,17 +6,13 @@
 #include <QtGui>
 #include <QGraphicsScene>
 #include <QList>
+#include <QStack>
 #include <QDebug>
 #include <QGraphicsItemGroup>
 #include <QGraphicsLineItem>
 
 
 #include <form.h>
-#include <rect.h>
-#include <ellipsoid.h>
-#include <romb.h>
-#include <opentrapezoid.h>
-#include <closetrapezoid.h>
 #include <mainscene.h>
 #include <node.h>
 #include <edge.h>
@@ -34,6 +30,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void drawDiagram();
+
 private slots:
 
     void on_addRect_clicked();
@@ -48,11 +46,27 @@ private slots:
 
     void on_connect_clicked();
 
+    void on_Read_clicked();
+
+    void on_addNode_clicked();
+
+    void on_setText_clicked();
+
 private:
     Ui::MainWindow *ui;
     MainScene *scene;
-
+    QString key = "//?";
     QList <Form*> all;
 
+    struct diagramElement{
+        QString type;
+        QString condition;
+        QString action;
+        QString buffer;
+        QString comment;
+    };
+
+public:
+    QList<diagramElement> elements;
 };
 #endif // MAINWINDOW_H

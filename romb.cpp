@@ -1,6 +1,6 @@
 #include "romb.h"
 
-Romb::Romb()
+Romb::Romb(QString _text) : Form(_text)
 {
     type = 3;
     output_connections.resize(2);

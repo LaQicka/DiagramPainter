@@ -1,6 +1,6 @@
 #include "rect.h"
 
-Rect::Rect() : Form()
+Rect::Rect(QString _text) : Form(_text)
 {
     type = 2;
     output_connections.resize(1);

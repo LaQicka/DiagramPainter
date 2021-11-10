@@ -1,6 +1,6 @@
 #include "form.h"
 
-Form::Form()
+Form::Form(QString _text)
 {
     Pressed = false;
     setFlag(ItemIsMovable);
@@ -10,16 +10,7 @@ Form::Form()
     input.second = 0;
     x_center = 125;
     y_center = 25;
-}
-
-Form::Form(QString text){
-    Pressed = false;
-    setFlag(ItemIsMovable);
-    setFlag(ItemIsSelectable);
-    x = 0, y = 0;
-    x_center = 125;
-    y_center = 25;
-    textContent = text;
+    textContent = _text;
 }
 
 Form::~Form()

@@ -20,8 +20,7 @@ private:
         Edge* edge;
     };
 public:    
-    Form();
-    Form(QString _text);
+    Form(QString _text = "");
     ~Form();
 
     QRectF boundingRect() const;
