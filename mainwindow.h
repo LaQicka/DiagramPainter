@@ -14,6 +14,7 @@
 
 #include <form.h>
 #include <mainscene.h>
+#include <texteditor.h>
 #include <node.h>
 #include <edge.h>
 
@@ -29,8 +30,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-    void drawDiagram();
 
 private slots:
 
@@ -57,16 +56,6 @@ private:
     MainScene *scene;
     QString key = "//?";
     QList <Form*> all;
-
-    struct diagramElement{
-        QString type;
-        QString condition;
-        QString action;
-        QString buffer;
-        QString comment;
-    };
-
-public:
-    QList<diagramElement> elements;
+    textEditor text;
 };
 #endif // MAINWINDOW_H

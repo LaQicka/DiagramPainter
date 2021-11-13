@@ -19,7 +19,8 @@ SOURCES += \
     node.cpp \
     opentrapezoid.cpp \
     rect.cpp \
-    romb.cpp
+    romb.cpp \
+    texteditor.cpp
 
 HEADERS += \
     closetrapezoid.h \
@@ -31,7 +32,8 @@ HEADERS += \
     node.h \
     opentrapezoid.h \
     rect.h \
-    romb.h
+    romb.h \
+    texteditor.h
 
 FORMS += \
     mainwindow.ui

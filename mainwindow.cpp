@@ -8,16 +8,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     ui->graphicsView->setScene(scene);
+
+    text.scene = scene;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::drawDiagram()
-{
-
 }
 
 void MainWindow::on_setText_clicked()
@@ -152,45 +149,19 @@ void MainWindow::on_Read_clicked()
     QTextStream input(&file);
 
     if(!file.open(QIODevice::ReadOnly)){
-        qDebug()<<"fuck u";
+        qDebug()<<"could not find such file";
     }
     else{
+        Ellipsoid* ell1;
+        Ellipsoid* ell2;
+        ell1 = new Ellipsoid("start");
+        ell2 = new Ellipsoid("end");
+        scene->addItem(ell1);
+        scene->addItem(ell2);
         while(!input.atEnd()){
             QString line = input.readLine();
-            diagramElement current;
-            bool flag = false;
-            int open=0, close=0;
-            int j=0;
-            QChar t1,t2,t3;
-
-            while(j<line.size() && line[j]==' ') j++;
-
-            for(int i=0;i<line.size()-j;i++){
-
-                if(i<3 && current.type!="if") current.type+=line[i+j];
-
-                else if((current.type == "if" || current.type == "for") && !flag && current.buffer!=this->key){
-                    if (line[i+j]==')')close++;
-                    if(open && open!=close)current.condition+=line[i+j];
-                    if(open && open==close)flag = true;
-                    if(line[i+j]=='(')open++;
-                }
-
-                else if(i>=3 && !flag) flag = true;
-
-                else if(flag && current.buffer!=this->key){
-                    t1=t2;
-                    t2=t3;
-                    t3=line[i+j];
-                    current.buffer = t1, current.buffer+=t2, current.buffer+=t3;
-                }
-
-                else if(flag && current.buffer==this->key){
-                    current.comment+=line[i+j];
-                }
-
-            }
-            if(current.buffer == this->key)elements.append(current);
+            text.addString(line);
         }
+        text.drawBlock(key,0,text.getTextSize(), ell1,ell2,0,100);
     }
 }

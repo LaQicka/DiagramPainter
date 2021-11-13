@@ -5,6 +5,12 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene()
     Q_UNUSED(parent);
 }
 
+void MainScene::addingItem(Form *form)
+{
+    forms.append(form);
+    this->addItem(form);
+}
+
 void MainScene::addRect(QString text)
 {
     Rect* rect;
@@ -59,9 +65,9 @@ void MainScene::connectForms(Form *source, Form *dest)
     Edge* edge1;
     Edge* edge2;
     Node* node;
-    node = new Node();
-    edge1 = new Edge();
-    edge2 = new Edge();
+    node = new Node;
+    edge1 = new Edge;
+    edge2 = new Edge;
 
     node->x = source->x + (dest->x - source->x)/2 + source->x_center;
     node->y = source->y + (dest->y - source->y)/2;
@@ -76,6 +82,13 @@ void MainScene::connectForms(Form *source, Form *dest)
     this->forms.append(node);
     this->addItem(edge1);
     this->addItem(edge2);
+}
+
+void MainScene::setPosToForm(int x, int y, Form *form)
+{
+    form->x = x;
+    form->y = y;
+    form->setPos(x,y);
 }
 
 void MainScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

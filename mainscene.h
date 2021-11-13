@@ -20,6 +20,7 @@ class MainScene : public QGraphicsScene
 public:
     explicit MainScene(QObject* parent = nullptr);
 
+    void addingItem(Form* form);
     void addRect(QString text = "");
     void addEllipse(QString text = "");
     void addRomb(QString text = "");
@@ -27,6 +28,8 @@ public:
     void deleteForm(Form* item);
 
     void connectForms(Form* source, Form* dest);
+
+    void setPosToForm(int x,int y,Form* form);
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
