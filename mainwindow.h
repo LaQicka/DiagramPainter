@@ -6,11 +6,11 @@
 #include <QtGui>
 #include <QGraphicsScene>
 #include <QList>
-#include <QStack>
 #include <QDebug>
 #include <QGraphicsItemGroup>
 #include <QGraphicsLineItem>
-
+#include <QApplication>
+#include <QtSvg/QSvgGenerator>
 
 #include <form.h>
 #include <mainscene.h>
@@ -50,6 +50,8 @@ private slots:
     void on_addNode_clicked();
 
     void on_setText_clicked();
+
+    void on_save_clicked();
 
 private:
     Ui::MainWindow *ui;

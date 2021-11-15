@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     ui->graphicsView->setScene(scene);
     text.scene = scene;
+    text.setKey(this->key);
 }
 
 MainWindow::~MainWindow()
@@ -144,7 +145,7 @@ void MainWindow::on_connect_clicked()
 
 void MainWindow::on_Read_clicked()
 {
-    QString name = ui->fileName->text();
+    QString name = ui->fileToRead->text();
     QFile file(name);
     QTextStream input(&file);
 
@@ -162,6 +163,23 @@ void MainWindow::on_Read_clicked()
             QString line = input.readLine();
             text.addString(line);
         }
-        text.drawBlock(key,0,text.getTextSize(), ell1,ell2,0,100);
+        text.drawBlock(0,text.getTextSize(), ell1,ell2,0,100,0);
     }
 }
+
+void MainWindow::on_save_clicked()
+{
+    QString name = ui->fileToSave->text();
+    if(name.isEmpty()) return;
+    QSvgGenerator generator;
+    generator.setFileName(name);
+    generator.setSize(QSize(scene->width(),scene->height()));
+    generator.setViewBox(QRect(0, 0, scene->width(), scene->height()));
+
+    QPainter painter;
+    painter.begin(&generator);
+    scene->render(&painter);
+    painter.end();
+    qDebug()<<name;
+}
+
