@@ -4,6 +4,12 @@ void Edge::setStart(Form *node)
 {
     start = node;
     start->addOutputEdge(this);
+    if(start->getType() == 3){
+        for(int i=0;i<start->output_connections.size();i++){
+            if(i == 0 && start->output_connections[i].edge == this) textContent = "true";
+            else if(textContent.isEmpty()) textContent = "false";
+        }
+    }
     adjust();
 }
 
@@ -16,6 +22,7 @@ void Edge::setEnd(Form *node)
 
 void Edge::deleteStart()
 {
+    textContent.clear();
     end->input_edges.removeAll(this);
     start = nullptr;
 }
@@ -59,10 +66,9 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(start == nullptr || end == nullptr)return;
 
     QLineF line(source,dest);
-
     painter->setPen(Qt::black);
     painter->drawLine(line);
-
+    painter->drawText(source,textContent);
 }
 
 Form *Edge::startNode() const

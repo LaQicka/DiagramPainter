@@ -3,6 +3,7 @@
 
 #include <QGraphicsItem>
 #include <QGraphicsLineItem>
+#include <QString>
 #include <form.h>
 #include <cmath>
 
@@ -27,6 +28,7 @@ public:
     Form* end = nullptr;
 
 private:
+    QString textContent;
     int i = 0;
     QPointF source, dest;
 };
