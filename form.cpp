@@ -53,26 +53,26 @@ bool Form::existOutputSlots()
     return !flag;
 }
 
-QPair<int, int> Form::getPos(Edge *edge)
+QPointF Form::getPos(Edge *edge)
 {
-    QPair <int,int> ans;
+    QPointF ans;
     if(type == 6) {
-        ans.first = x + 2;
-        ans.second = y + 2;
+        ans.setX(2);
+        ans.setY(2);
         return ans;
     }
     foreach(Edge* ed, input_edges){
         if(ed == edge){
-            ans.first = x + input.first;
-            ans.second = y + input.second;
+            ans.setX(input.first);
+            ans.setY(input.second);
             return ans;
         }
     }
 
     for(int i=0;i<output_connections.size();i++){
         if(output_connections[i].edge == edge){
-            ans.first = x + output_connections[i].x_connect;
-            ans.second = y + output_connections[i].y_connect;
+            ans.setX(output_connections[i].x_connect);
+            ans.setY(output_connections[i].y_connect);
             return ans;
         }
     }
@@ -82,16 +82,8 @@ QPair<int, int> Form::getPos(Edge *edge)
 
 QVariant Form::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-    switch (change)
-    {
-        case ItemPositionChange:
-            foreach(Edge* edge, input_edges) edge->adjust();
-            foreach(Edge* edge, output_edges) edge->adjust();
-            break;
-        default:
-            break;
-    }
-
+    foreach(Edge* edge, input_edges) edge->adjust();
+    foreach(Edge* edge, output_edges) edge->adjust();
     return QGraphicsItem::itemChange(change,value);
 }
 

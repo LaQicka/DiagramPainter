@@ -2,6 +2,7 @@
 #define EDGE_H
 
 #include <QGraphicsItem>
+#include <QGraphicsLineItem>
 #include <form.h>
 #include <cmath>
 
@@ -26,7 +27,8 @@ public:
     Form* end = nullptr;
 
 private:
-
+    int i = 0;
+    QPointF source, dest;
 };
 
 #endif // EDGE_H

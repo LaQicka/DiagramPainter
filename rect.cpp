@@ -29,7 +29,6 @@ void Rect::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     if(isSelected()){
         brush.setColor(Qt::green);
     }
-
     painter->fillRect(item,brush);
     painter->drawRect(item);
     painter->drawText(boundingRect(), Qt::AlignCenter, textContent);

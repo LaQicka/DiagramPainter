@@ -36,7 +36,7 @@ public:
     bool existInputSlots();
     bool existOutputSlots();
 
-    QPair <int,int> getPos(Edge* edge);
+    QPointF getPos(Edge* edge);
 
     QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 

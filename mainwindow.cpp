@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     ui->graphicsView->setScene(scene);
-
     text.scene = scene;
 }
 
@@ -113,10 +112,11 @@ void MainWindow::on_addNode_clicked(){
 
 void MainWindow::on_addRect_clicked()
 {
-    if(!scene->first_selected || !scene->second_selected)scene->addRect();
-    else{
+    scene->addRect();
+//    if(!scene->first_selected || !scene->second_selected)scene->addRect();
+//    else{
 
-    }
+//    }
 }
 
 void MainWindow::on_addEllipse_clicked()

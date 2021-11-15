@@ -12,7 +12,9 @@ int textEditor::getTextSize()
 
 void textEditor::drawBlock(QString key, int start, int end, Form *source, Form *dest, int x, int y)
 {
-    for(int i=start;i<end;i++){
+    int main_x = source->x;
+    for(int i = start;i < end;i++){
+
         //Parsing of string
         QString type, condition, action, buff, comment;
         bool type_found = false, condition_found = false, key_found = false;
@@ -39,7 +41,6 @@ void textEditor::drawBlock(QString key, int start, int end, Form *source, Form *
                     type+=text[i][j];
                     if(type == "if" || type == "for" || type == "while" || type == "switch"){
                         type_found = true;
-                        qDebug()<<type;
                         action.clear();
                     }
                 }
@@ -54,9 +55,9 @@ void textEditor::drawBlock(QString key, int start, int end, Form *source, Form *
         }
 
         //adding blocks to scene
-        if(key_found)qDebug()<<type;
 
         if(!type_found && key_found){
+            qDebug()<<1;
             Rect* rect;
             rect = new Rect(comment);
             scene->addingItem(rect);
@@ -65,28 +66,56 @@ void textEditor::drawBlock(QString key, int start, int end, Form *source, Form *
             scene->connectForms(source,rect);
             source = rect;
         }
-//        else if(type == "if" && key_found){
-//            Romb* romb;
-//            Node* node;
-//            romb = new Romb(condition);
-//            node = new Node;
-//            scene->addingItem(romb);
-//            scene->setPosToForm(x,y,romb);
-//            y+=100;
-//            scene->connectForms(source,romb);
-//            int open = 1, close = 0, j = i+1;
-//            for(;j<end;j++){
-//                for(int t=0;t<text[j].size();t++){
-//                    if(text[j][t] == '}') close++;
-//                    else if(text[j][t] == '{') open++;
-//                }
-//                if(open == close)break;
-//            }
-//            drawBlock(key,i+1,j-1,romb,node,x,y);
-//            source = node;
-////            x = node->x, y = node->y;
+        else if(type == "if" && key_found){
+            Romb* romb;
+            Node* node;
+            romb = new Romb(condition);
+            node = new Node;
+            scene->addingItem(romb);
+            scene->addingItem(node);
+            scene->setPosToForm(x,y,romb);
+            y+=100;
+            scene->connectForms(source,romb);
+
+            int open = 1, close = 0, j = i+1;
+            for(;j<end;j++){
+                for(int t=0;t<text[j].size();t++){
+                    if(text[j][t] == '}') close++;
+                    else if(text[j][t] == '{') open++;
+                }
+                if(open == close)break;
+            }
+            drawBlock(key,i+1,j,romb,node,x,y);
+            i = ++j;
+
+            QString temp;
+            int t=0;
+            while(t<text[j].size() && (text[j][t] == '\t' || text[j][t] == ' ')) t++;
+            for(;t<text[j].size();t++){
+                temp+=text[j][t];
+                if(temp == "else" || temp.size() == 4)break;
+            }
+            if(temp == "else"){
+                open = 1, close = 0, t = 0;
+                for(;j<end;j++){
+                    for(;t<text[j].size();t++){
+                        if(text[j][t] == '}') close++;
+                        else if(text[j][t] == '{') open++;
+                    }
+                    if(open == close)break;
+                }
+                drawBlock(key,i+1,j-1,romb,node,x+300,y);
+                i = j+1;
+            }
+            else{
+                scene->connectForms(romb,node);
+                scene->setPosToForm(x,y,node);
+            }
+
+            source = node;
+            y = node->y;
         }
     }
-    scene->setPosToForm(x,y,dest);
+    scene->setPosToForm(main_x,source->y+100,dest);
     scene->connectForms(source,dest);
 }

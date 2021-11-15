@@ -37,18 +37,18 @@ void Edge::adjust()
 {
     if(start == nullptr || end == nullptr) return;
 
-    QLineF line(mapFromItem(start, 0, 0), mapFromItem(end, 0, 0));
+    QLineF line(mapFromItem(start,0,0), mapFromItem(end, 0, 0));
 
     prepareGeometryChange();
-
+    source = line.p1()+start->getPos(this);
+    dest = line.p2()+end->getPos(this);
 }
 
 QRectF Edge::boundingRect() const
 {
+    if(start == nullptr || end == nullptr)return QRectF();
 
-    if(start == nullptr || end == nullptr) return QRectF();
-
-    return QRectF(0,0,100,100);
+    return QRectF(source, QSizeF(dest.x()-source.x(),dest.y()-source.y())).normalized();
 }
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -56,16 +56,13 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    if(start == nullptr || end == nullptr) return;
+    if(start == nullptr || end == nullptr)return;
 
-    QPair <int,int> st,en;
-    st = start->getPos(this);
-    en = end->getPos(this);
-
-    QLineF line(st.first,st.second,en.first,en.second);
+    QLineF line(source,dest);
 
     painter->setPen(Qt::black);
     painter->drawLine(line);
+
 }
 
 Form *Edge::startNode() const
