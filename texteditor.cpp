@@ -54,7 +54,7 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
                 }
             }
         }
-
+        if(key_found)qDebug()<<comment;
         //adding blocks to scene
         // action block
         if(!type_found && key_found){
@@ -62,7 +62,7 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
             rect = new Rect(comment);
             scene->addingItem(rect);
             scene->setPosToForm(x,y,rect);
-            y += 100;
+            y += 150;
             scene->connectForms(source,rect);
             source = rect;
         }
@@ -76,7 +76,7 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
             scene->addingItem(romb);
             scene->addingItem(node);
             scene->setPosToForm(x,y,romb);
-            y+=100;
+            y+=150;
             scene->connectForms(source,romb);
 
             int open = 1, close = 0, k = i+1;
@@ -142,7 +142,7 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
             scene->addingItem(opt);
             scene->addingItem(cpt);
             scene->setPosToForm(x,y,opt);
-            y+=100;
+            y+=150;
             scene->connectForms(source,opt);
 
             int open = 1, close = 0, k = i+1;
@@ -155,8 +155,8 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
             }
             drawBlock(i+1,k,opt,cpt,x,y,0);
             source = cpt;
-            y = cpt->y;
-            i = k + 1;
+            y = cpt->y + 150;
+            i = k;
         }
 
         // while block
@@ -168,7 +168,7 @@ void textEditor::drawBlock(int start, int end, Form *source, Form *dest, int x, 
             scene->addingItem(romb);
             scene->addingItem(node);
             scene->setPosToForm(x,y,romb);
-            y+=100;
+            y+=150;
             scene->connectForms(source,romb);
 
             int open = 1, close = 0, k = i+1;
