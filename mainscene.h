@@ -57,6 +57,8 @@ public:
 /// @param form -- pointer of element
     void setPosToForm(int x,int y,Form* form);
 
+    void deleteEdgeBetweenSelected();
+
 /// @brief function that catch mousePressEvent and realize custom work of it
 /// @param event -- scene mouse event
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

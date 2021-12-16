@@ -15,14 +15,8 @@ Form::Form(QString _text)
 
 Form::~Form()
 {
-    foreach(Edge* edge, input_edges){
-        if(edge->startNode() == this) edge->deleteStart();
-        else edge->deleteEnd();
-    }
-    foreach(Edge* edge, output_edges){
-        if(edge->startNode() == this) edge->deleteStart();
-        else edge->deleteEnd();
-    }
+    foreach(Edge* edge, input_edges)edge->deleteNodes();
+    foreach(Edge* edge, output_edges)edge->deleteNodes();
 }
 
 void Form::setText(QString _text){
@@ -43,6 +37,22 @@ void Form::addOutputEdge(Edge *edge)
             output_edges.append(edge);
             return;
          }
+    }
+}
+
+void Form::deleteInputEdge(Edge *edge)
+{
+    if(input_edges.contains(edge)){
+        edge->deleteNodes();
+    }
+}
+
+void Form::deleteOutputEdge(Edge *edge)
+{
+    foreach(Connection con, output_connections){
+        if(con.edge == edge){
+            edge->deleteNodes();
+        }
     }
 }
 

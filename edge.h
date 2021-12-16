@@ -13,6 +13,8 @@ class Edge : public QGraphicsItem
 {
 public:
 
+
+    ~Edge();
 /// @brief function that setting start point of edge
 /// @param node -- starting node
     void setStart(Form* node);
@@ -21,11 +23,7 @@ public:
 /// @param node -- ending node
     void setEnd(Form* node);
 
-/// @brief function that deleting starting point of edge
-    void deleteStart();
-
-/// @brief function that deleting ending point of edge
-    void deleteEnd();
+    void deleteNodes();
 
 /// @brief function that prepare scene to rerender
     void adjust();

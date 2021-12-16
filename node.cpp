@@ -1,7 +1,11 @@
 #include "node.h"
 
-Node::Node() : Form()
+Node::Node()
 {
+    Pressed = false;
+    setFlag(ItemIsMovable);
+    setFlag(ItemIsSelectable);
+    x = 0, y = 0;
     type = 6;
     x_center = 4;
     y_center = 4;

@@ -91,6 +91,62 @@ void MainScene::setPosToForm(int x, int y, Form *form)
     form->setPos(x,y);
 }
 
+void MainScene::deleteEdgeBetweenSelected()
+{
+    QList<Form*> nodes1;
+    QList<Form*> nodes2;
+    Edge* edge1 = nullptr;
+    Edge* edge2 = nullptr;
+    bool flag=false,flag1=false,flag2=false;
+    Form* i =  this->first_selected;
+
+    if(i->getType()==3){
+        if(i->output_connections[0].isBusy)edge1 = i->output_connections[0].edge;
+        if(i->output_connections[1].isBusy)edge2 = i->output_connections[1].edge;
+        flag=true;
+    }
+    else{
+        if(i->output_connections[0].isBusy)edge1 = i->output_connections[0].edge;
+    }
+    qDebug()<<1;
+    if(!flag){
+        if(edge1 && edge1->endNode()==this->second_selected){
+            this->first_selected->deleteOutputEdge(edge1);
+        }
+    }
+    else{
+        if(edge1 && edge1->endNode()==this->second_selected)this->first_selected->deleteOutputEdge(edge1);
+        if(edge2 && edge2->endNode()==this->second_selected)this->first_selected->deleteOutputEdge(edge2);
+    }
+    qDebug()<<2;
+    while(edge1 && edge1->endNode()!=nullptr && edge1->endNode()->getType()==6){
+        i = edge1->endNode();
+        edge1 = i->output_connections[0].edge;
+        nodes1.append(i);
+        if(edge1->endNode()==this->second_selected)flag1=true;
+    }
+
+    while(edge2 && !flag1 && flag && edge2->endNode()!=nullptr && edge2->endNode()->getType()==6){
+        i = edge2->endNode();
+        edge2 = i->output_connections[0].edge;
+        nodes2.append(i);
+        if(edge2->endNode()==this->second_selected)flag2=true;
+    }
+    if(flag1){
+        foreach(Form* item,nodes1){
+            this->deleteForm(item);
+            delete item;
+        }
+    }
+    else if(flag2){
+        foreach(Form* item,nodes2){
+            this->deleteForm(item);
+            delete item;
+        }
+    }
+    this->update();
+}
+
 void MainScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem* item = this->itemAt(event->scenePos(), QTransform());

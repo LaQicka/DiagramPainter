@@ -45,6 +45,10 @@ public:
 /// @param edge -- pointer to this edge
     void addOutputEdge(Edge* edge);
 
+    void deleteInputEdge(Edge* edge);
+
+    void deleteOutputEdge(Edge* edge);
+
 /// @brief bool function that help others detect if exist input slots for edges
     bool existInputSlots();
 

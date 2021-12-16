@@ -1,5 +1,10 @@
 #include "edge.h"
 
+Edge::~Edge()
+{
+    qDebug()<<1;
+}
+
 void Edge::setStart(Form *node)
 {
     start = node;
@@ -20,16 +25,8 @@ void Edge::setEnd(Form *node)
     adjust();
 }
 
-void Edge::deleteStart()
+void Edge::deleteNodes()
 {
-    textContent.clear();
-    end->input_edges.removeAll(this);
-    start = nullptr;
-}
-
-void Edge::deleteEnd()
-{
-    start->output_edges.removeAll(this);
     for(int i=0;i<start->output_connections.size();i++){
         if(start->output_connections[i].edge == this){
             start->output_connections[i].edge = nullptr;
@@ -37,7 +34,11 @@ void Edge::deleteEnd()
             break;
         }
     }
-    end = nullptr;
+    start->output_edges.removeAll(this);
+    start=nullptr;
+
+    end->input_edges.removeAll(this);
+    end=nullptr;
 }
 
 void Edge::adjust()
